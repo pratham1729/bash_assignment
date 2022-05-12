@@ -14,18 +14,18 @@ then
     key=$(gpg --list-secret-keys --keyid-format=long|awk '/sec/{if (length($2)>0) print $2}')
     declare -a uid_array=()
     declare -a keys_array=()
-    j=0
+    key_count=0
     length_key=${#key}
     length_uid=${#uid}
     for((i=0;i<$length_key;i++));
     do
         if [[ ${key:$i:1} == '/' ]] 
         then
-            keys_array[$j]=${key:$i+1:16}
-            ((j++))
+            keys_array[$key_count]=${key:$i+1:16}
+            ((key_count++))
         fi
     done
-    j2=0
+    uid_count=0
     start=0
     end=0
     for((i=0;i<$length_uid;i++));
@@ -37,12 +37,12 @@ then
         if [[ ${uid:$i:1} == '>' ]] 
         then
             end=$i+1
-            uid_array[$j2]=${uid:$start+1:$end-$start-2}
-            ((j2++))
+            uid_array[$uid_count]=${uid:$start+1:$end-$start-2}
+            ((uid_count++))
         fi
     done
     echo "Choose the user"
-    for((i=0;i<j;i++));
+    for((i=0;i<key_count;i++));
     do
         echo $((i+1)) ${uid_array[$i]}
     done
