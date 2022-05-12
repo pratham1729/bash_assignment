@@ -26,18 +26,18 @@ then
         fi
     done
     j2=0
-    s=0
-    e=0
+    start=0
+    end=0
     for((i=0;i<$length_uid;i++));
     do
         if [[ ${uid:$i:1} == ']' ]] 
         then
-            s=$i+1
+            start=$i+1
         fi
         if [[ ${uid:$i:1} == '>' ]] 
         then
-            e=$i+1
-            uid_array[$j2]=${uid:$s+1:$e-$s}
+            end=$i+1
+            uid_array[$j2]=${uid:$start+1:$end-$start-2}
             ((j2++))
         fi
     done
@@ -53,6 +53,7 @@ then
     gpg --armor --export $x
 	git config --global user.signingkey $x
 	git config --global commit.gpgsign true
+    [ -f ~/.bashrc ] && echo 'export GPG_TTY=$(tty)' >> ~/.bashrc
 
     echo "Copy this key and paste this in your GPG section of your Github Account"
 elif [ $val -eq 2 ];
