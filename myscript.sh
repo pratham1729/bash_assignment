@@ -13,25 +13,6 @@ then
     key=$(gpg --list-secret-keys --keyid-format=long|awk '/sec/{if (length($2)>0) print $2}')
     declare -a uid_array=()
     declare -a keys_array=()
-    # n1=${#uid}
-    # n2=${#key}
-    # j=0
-    # keys_array[$j]=${key:9:16}
-    # start=0
-    # end=0
-    # for((i=0;i<$n1;i++));
-    # do
-    #     if [[ ${uid:i:1} == ']' ]] 
-    #     then
-    #         start=$i+1
-    #     fi
-    #     if [[ ${uid:i:1} == '>' ]] 
-    #     then
-    #         end=$i+1
-    #         uid_array[$j]=${uid:$start:$end-$start-1}
-    #         ((j++))
-    #     fi
-    # done
     j=0
     length_key=${#key}
     length_uid=${#uid}
