@@ -7,6 +7,7 @@ echo "2: Generate a new Key"
 echo "3: Quit"
 
 read val
+
 if [ $val -eq 1 ];
 then
     uid=$(gpg --list-secret-keys --keyid-format=long|awk '/uid/')
