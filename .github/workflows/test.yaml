@@ -10,12 +10,11 @@ jobs:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
-      - name: Execute SSH commmands on remote server
-        uses: JimCronqvist/action-ssh@master
-        with: 
-          hosts: ${{ secrets.HOSTNAME  }}
-          privateKey: ${{ secrets.PRIVATE_KEY }}
-          debug: false
-          command: |
-            cd bash_assignment
+      - name: ls -a via ssh
+        uses: garygrossgarten/github-action-ssh@release
+        with:
+          command: ls -a
+          host: ${{ secrets.HOSTNAME }}
+          username: ${{ secrets.USER_NAME  }}
+          privateKey: ${{ secrets.PRIVATE_KEY}}
             
