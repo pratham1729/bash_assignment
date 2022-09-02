@@ -11,7 +11,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
-      - run: ssh -o StrictHostKeyChecking=no -tt -A -i private_key ${USER_NAME}@${HOSTNAME}
-      - run: cd bash_assignment
-      - run: git pull
-
+      - name: Execute SSH commmands on remote server
+        uses: JimCronqvist/action-ssh@master
+        with: 
+          hosts: ${{ secrets.HOSTNAME  }}
+          privateKey: ${{ secrets.PRIVATE_KEY }}
+          debug: false
+          command: |
+            cd bash_assignment
+            git pull
+            
