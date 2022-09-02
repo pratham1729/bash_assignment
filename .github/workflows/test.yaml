@@ -11,5 +11,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
-      - run: ssh -A -i private_key ${USER_NAME}@${HOSTNAME} 'cd bash_assignment && ssh-add -l'
+      - run: ssh -A StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} 'cd bash_assignment && ssh-add -l'
             
