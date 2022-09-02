@@ -13,7 +13,9 @@ jobs:
       - name: ls -a via ssh
         uses: garygrossgarten/github-action-ssh@release
         with:
-          command: ls -a
+          command: |
+            cd backend_assignment
+            git pull
           host: ${{ secrets.HOSTNAME }}
           username: ${{ secrets.USER_NAME  }}
           privateKey: ${{ secrets.PRIVATE_KEY}}
