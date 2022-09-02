@@ -14,7 +14,7 @@ jobs:
         uses: garygrossgarten/github-action-ssh@release
         with:
           command: |
-            cd backend_assignment
+            cd bash_assignment
             git pull
           host: ${{ secrets.HOSTNAME }}
           username: ${{ secrets.USER_NAME  }}
