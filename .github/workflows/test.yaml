@@ -10,7 +10,6 @@ jobs:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
-      - run: echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
       - name: Execute SSH commmands on remote server
         uses: JimCronqvist/action-ssh@master
         with: 
@@ -19,5 +18,4 @@ jobs:
           debug: false
           command: |
             cd bash_assignment
-            git pull
             
