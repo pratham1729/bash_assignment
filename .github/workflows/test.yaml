@@ -11,5 +11,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
-      - run: ssh -o StrictHostKeyChecking=no -A -i private_key ${USER_NAME}@${HOSTNAME} 'cd bash_assignment && ls -al'
+      - run: ssh -o StrictHostKeyChecking=no -A -i private_key ${USER_NAME}@${HOSTNAME} 'cd bash_assignment && git pull'
             
