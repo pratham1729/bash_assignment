@@ -1,0 +1,18 @@
+on:
+  pull_request:
+    types: -closed
+jobs:
+  if_merged:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+       env:
+          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY  }}
+          HOSTNAME : ${{ secrets.HOSTNAME  }}
+          USER_NAME : ${{ secrets.USER_NAME  }}
+    steps:
+      -run: |
+        echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
+        ssh -A -i private_key ${USER_NAME}@${HOSTNAME}
+        cd bash_assignment
+        git pull
+        
