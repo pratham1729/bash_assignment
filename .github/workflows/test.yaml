@@ -10,8 +10,8 @@ jobs:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
-      - run: echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
-      - run: eval 'ssh-agent -s'
-      - run: ssh-add
+      - uses: webfactory/ssh-agent@v0.5.4
+        with: 
+            ssh-private-key: ${PRIVATE_KEY}
       - run: ssh -A -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} 'cd bash_assignment && git pull'
             
